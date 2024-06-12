@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-colorful {
+  @apply min-w-full;
+}
+
+.react-colorful__saturation {
+  @apply mb-4 rounded-md !important;
+}
+
+.react-colorful__hue {
+  @apply mb-4;
+}
