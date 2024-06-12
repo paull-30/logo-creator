@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  height: 100vh;
+}
+
 .react-colorful {
   @apply min-w-full;
 }
@@ -12,4 +16,20 @@
 
 .react-colorful__hue {
   @apply mb-4;
+}
+
+.range {
+  @apply w-full appearance-none  bg-transparent rounded-md h-6 cursor-pointer mt-2;
+}
+
+.range::-moz-range-thumb {
+  @apply h-4 w-4 rounded-sm  bg-slate-50 border-black border-4;
+}
+
+.range::-moz-range-track {
+  @apply h-2 w-full bg-slate-200 rounded-sm;
+}
+
+.range::-moz-range-progress {
+  @apply bg-black h-6 rounded-sm;
 }
