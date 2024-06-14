@@ -1,76 +1,51 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { CiHeart } from 'react-icons/ci';
 
-export const initialLogoIcon = CiHeart;
-
-const initialPresets = {
-  logoPreset1: {
-    size: 400,
-    strokeWidth: 2,
-    rotate: 0,
-    strokeColor: '#ffffff',
-    fillColor: '#ffffff',
-    fillOpacity: 0,
-    padding: 45,
-    radius: 0,
-    backgroundColor: 'rgb(203 213 225)',
-    shadow: 'shadow-none',
-  },
-  logoPreset2: {
-    size: 400,
-    strokeWidth: 2.2,
-    rotate: 0,
-    strokeColor: '#222222',
-    fillColor: '#ffffff',
-    fillOpacity: 0.9,
-    padding: 45,
-    radius: 0,
-    backgroundColor: '#ffeda0',
-    shadow: 'shadow-none',
-  },
-  logoPreset3: {
-    size: 400,
-    strokeWidth: 2,
-    rotate: 0,
-    strokeColor: '#1e1e1e',
-    fillColor: '#ffffff',
-    fillOpacity: 0.9,
-    padding: 45,
-    radius: 120,
-    backgroundColor: 'linear-gradient(45deg, #ef709b 0%, #eca0ff 100%)',
-    shadow: 'shadow-xl',
-  },
-  logoPreset4: {
-    size: 400,
-    strokeWidth: 2,
-    rotate: 0,
-    strokeColor: '#1e1e1e',
-    fillColor: '#ffffff',
-    fillOpacity: 0.9,
-    padding: 45,
-    radius: 300,
-    backgroundColor: 'radial-gradient(circle, #c6f8ff 0%, #a9ff68 100%)',
-    shadow: 'shadow-2xl',
-  },
+const LogoContext = createContext(undefined);
+const initialLogoStyle = {
+  size: 200,
+  strokeWidth: 2,
+  rotate: 0,
+  strokeColor: '#ffffff',
+  fillColor: '#ffffff',
+  fillOpacity: 0,
+  padding: 45,
+  radius: 0,
+  backgroundColor: '',
+  shadow: '',
 };
 
-export const LogoContext = createContext({
-  icon: initialLogoIcon,
-  presets: initialPresets,
-  updateIcon: () => {},
-});
+function LogoProvider({ children }) {
+  const [icon, setIcon] = useState({ type: CiHeart });
+  const [open, setOpen] = useState(false);
+  const [iconStyles, setIconStyles] = useState(initialLogoStyle);
 
-export const LogoProvider = ({ children }) => {
-  const [presets] = useState(initialPresets);
-  const [icon, setIcon] = useState(() => initialLogoIcon);
-
-  const updateIcon = (newIcon) => {
-    setIcon(() => newIcon);
+  const updateIconStyles = (updatedStyles) => {
+    setIconStyles((prevStyles) => ({ ...prevStyles, ...updatedStyles }));
   };
 
   return (
-    <LogoContext.Provider value={{ icon, presets, updateIcon }}>
+    <LogoContext.Provider
+      value={{
+        icon,
+        setIcon,
+        open,
+        setOpen,
+        iconStyles,
+        updateIconStyles,
+      }}
+    >
       {children}
     </LogoContext.Provider>
   );
-};
+}
+
+function useLogo() {
+  const context = useContext(LogoContext);
+  if (context === null) {
+    throw new Error('useLogo must be used within a LogoProvider');
+  }
+  return context;
+}
+
+export { useLogo, LogoProvider };

@@ -15,7 +15,7 @@ import {
   GiCutDiamond,
   GiOppositeHearts,
 } from 'react-icons/gi';
-import { LogoContext } from '../../store/logo-context';
+import { useLogo } from '../../store/logo-context';
 
 const customBorderRadius = ['', 'rounded-xl', 'rounded-full'];
 const customBackgroundColors = [
@@ -53,6 +53,8 @@ const getRandomElement = <T,>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 
 const Navbar = () => {
+  const { icon: Icon, updateIconStyles } = useLogo();
+
   const [currentItem, setCurrentItem] = useState<Item>({
     Icon: getRandomElement(icons),
     borderRadius: getRandomElement(customBorderRadius),
@@ -70,8 +72,6 @@ const Navbar = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  const { icon: Icon } = useContext(LogoContext);
 
   return (
     <header className='flex py-2 md:pl-6 px-4 border-b gap-4 items-center justify-between flex-wrap'>
@@ -92,29 +92,61 @@ const Navbar = () => {
           <li className='text-sm text-slate-500 max-md:hidden'>Presets</li>
           <li>
             <button>
-              <div className='bg-slate-300 h-12 w-12 flex items-center justify-center'>
-                <Icon className='w-6 h-6 hover:scale-[1.1] duration-100' />
+              <div
+                className='bg-slate-300 h-12 w-12 flex items-center justify-center '
+                onClick={() =>
+                  updateIconStyles({
+                    backgroundColor: 'rgb(203 213 225)',
+                    radius: '0',
+                  })
+                }
+              >
+                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
               </div>
             </button>
           </li>
           <li>
             <button>
-              <div className='bg-yellow-300 h-12 w-12 flex items-center justify-center'>
-                <Icon className='w-6 h-6 hover:scale-[1.1] duration-100' />
+              <div
+                className='bg-yellow-300 h-12 w-12 flex items-center justify-center'
+                onClick={() =>
+                  updateIconStyles({
+                    backgroundColor: 'rgb(253 224 71)',
+                    radius: '0',
+                  })
+                }
+              >
+                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
               </div>
             </button>
           </li>
           <li>
             <button>
-              <div className='bg-red-300 h-12 w-12 flex items-center justify-center rounded-xl'>
-                <Icon className='w-6 h-6 hover:scale-[1.1] duration-100' />
+              <div
+                className='bg-red-300 h-12 w-12 flex items-center justify-center rounded-xl'
+                onClick={() =>
+                  updateIconStyles({
+                    backgroundColor: 'rgb(252 165 165)',
+                    radius: '2rem',
+                  })
+                }
+              >
+                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
               </div>
             </button>
           </li>
           <li>
             <button>
-              <div className='bg-green-300 h-12 w-12 flex items-center justify-center rounded-full '>
-                <Icon className='w-6 h-6 hover:scale-[1.1] duration-100' />
+              <div
+                className='bg-green-300 h-12 w-12 flex items-center justify-center rounded-full '
+                onClick={() =>
+                  updateIconStyles({
+                    backgroundColor: 'rgb(134 239 172)',
+                    radius: '300px',
+                  })
+                }
+              >
+                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
               </div>
             </button>
           </li>

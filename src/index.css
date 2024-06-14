@@ -27,7 +27,7 @@
 }
 
 .range::-moz-range-track {
-  @apply h-2 w-full bg-slate-200 rounded-sm;
+  @apply h-2 w-full bg-slate-200 rounded-lg;
 }
 
 .range::-moz-range-progress {
