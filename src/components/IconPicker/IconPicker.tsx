@@ -3,11 +3,12 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { IconType } from 'react-icons';
 import { useLogo } from '../../store/logo-context';
 import { useState } from 'react';
+import Icon from '../Icon/Icon';
 
 const iconList: string[] = Object.keys(lucideIcons);
 
 const IconPicker = () => {
-  const { setIcon, open, setOpen } = useLogo();
+  const { updateIcon, open, setOpen } = useLogo();
   const [searchTerm, setSearchTerm] = useState('');
 
   if (!open) return null;
@@ -43,19 +44,16 @@ const IconPicker = () => {
       </form>
       <div className='mt-4 mx-20 flex flex-wrap gap-2 cursor-pointer'>
         {filteredIconList.map((icon, index) => {
-          const IconComponent: IconType = (
-            lucideIcons as { [key: string]: IconType }
-          )[icon];
           return (
             <div
               key={index}
               className='bg-slate-200 rounded-sm w-12 h-12 items-center flex justify-center hover:bg-slate-400 hover:scale-[1.2] transition-transform duration-300 ease-in-out'
               onClick={() => {
-                setIcon({ type: IconComponent });
+                updateIcon(icon);
                 setOpen(false);
               }}
             >
-              <IconComponent size={30} />
+              <Icon name={icon} size={30} />
             </div>
           );
         })}

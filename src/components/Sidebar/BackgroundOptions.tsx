@@ -2,6 +2,15 @@ import React from 'react';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import { useLogo } from '../../store/logo-context';
 
+const shadowClasses = {
+  0: 'shadow-none',
+  1: 'shadow-sm',
+  2: 'shadow-md',
+  3: 'shadow-lg',
+  4: 'shadow-xl',
+  5: 'shadow-2xl',
+};
+
 const BackgroundOptions = () => {
   const { updateIconStyles, iconStyles } = useLogo();
 
@@ -14,15 +23,7 @@ const BackgroundOptions = () => {
   };
 
   const handleShadowChange = (e) => {
-    const shadowClasses = [
-      'shadow-none',
-      'shadow-sm',
-      'shadow-md',
-      'shadow-lg',
-      'shadow-xl',
-      'shadow-2xl',
-    ];
-    updateIconStyles({ shadow: shadowClasses[parseInt(e.target.value)] });
+    updateIconStyles({ shadow: shadowClasses[e.target.value] });
   };
 
   return (
@@ -30,13 +31,13 @@ const BackgroundOptions = () => {
       <div>
         <div className=' flex justify-between mt-1 font-mono text-sm'>
           <span>Rounded</span>
-          <span>{iconStyles.radius} px</span>
+          <span>{iconStyles.radius ?? 0} px</span>
         </div>
         <input
           type='range'
           className='range'
           min={0}
-          value={iconStyles.radius}
+          value={iconStyles.radius ?? 0}
           max={300}
           onChange={handleRadiusChange}
         />
@@ -45,13 +46,13 @@ const BackgroundOptions = () => {
       <div>
         <div className='flex justify-between mt-1 font-mono text-sm'>
           <span>Padding</span>
-          <span>{iconStyles.padding} px</span>
+          <span>{iconStyles.padding ?? 0} px</span>
         </div>
         <input
           type='range'
           className='range'
           min={0}
-          value={iconStyles.padding}
+          value={iconStyles.padding ?? 0}
           max={100}
           onChange={handlePaddingChange}
         />
@@ -62,6 +63,11 @@ const BackgroundOptions = () => {
         <input
           type='range'
           min='0'
+          value={
+            Object.keys(shadowClasses).find(
+              (key) => shadowClasses[key] === iconStyles.shadow
+            ) ?? 0
+          }
           max='5'
           className='range'
           onChange={handleShadowChange}
@@ -77,7 +83,7 @@ const BackgroundOptions = () => {
       </div>
       <ColorPicker
         title='Background'
-        initialColor={iconStyles.backgroundColor}
+        initialColor={iconStyles.backgroundColor ?? ''}
         onColorChange={(color) => updateIconStyles({ backgroundColor: color })}
       />
     </div>

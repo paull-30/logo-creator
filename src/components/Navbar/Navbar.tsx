@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LuUndo2 } from 'react-icons/lu';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsBackpack2, BsFillBackpack2Fill } from 'react-icons/bs';
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { TbClover } from 'react-icons/tb';
 import { CiHeart } from 'react-icons/ci';
 import { IoMdHeartHalf } from 'react-icons/io';
@@ -16,6 +15,7 @@ import {
   GiOppositeHearts,
 } from 'react-icons/gi';
 import { useLogo } from '../../store/logo-context';
+import Icon from '../Icon/Icon';
 
 const customBorderRadius = ['', 'rounded-xl', 'rounded-full'];
 const customBackgroundColors = [
@@ -53,7 +53,8 @@ const getRandomElement = <T,>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 
 const Navbar = () => {
-  const { icon: Icon, updateIconStyles } = useLogo();
+  const { icon, updateIconStyles, undo } = useLogo();
+  const [dropdown, setDropdown] = useState(false);
 
   const [currentItem, setCurrentItem] = useState<Item>({
     Icon: getRandomElement(icons),
@@ -86,7 +87,10 @@ const Navbar = () => {
 
       <div className='flex items-center divide-x max-lg:order-last'>
         <button className='mr-4'>
-          <LuUndo2 className='w-6 h-6 hover:scale-[1.1] duration-100' />
+          <LuUndo2
+            onClick={undo}
+            className='w-6 h-6 hover:scale-[1.1] duration-100'
+          />
         </button>
         <ul className='flex gap-2 items-center px-4'>
           <li className='text-sm text-slate-500 max-md:hidden'>Presets</li>
@@ -101,7 +105,11 @@ const Navbar = () => {
                   })
                 }
               >
-                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
+                <Icon
+                  name={icon}
+                  className='w-6 h-6 hover:scale-[1.1] duration-100'
+                />
+                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -116,7 +124,11 @@ const Navbar = () => {
                   })
                 }
               >
-                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
+                <Icon
+                  name={icon}
+                  className='w-6 h-6 hover:scale-[1.1] duration-100'
+                />
+                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -131,7 +143,11 @@ const Navbar = () => {
                   })
                 }
               >
-                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
+                <Icon
+                  name={icon}
+                  className='w-6 h-6 hover:scale-[1.1] duration-100'
+                />
+                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -146,7 +162,11 @@ const Navbar = () => {
                   })
                 }
               >
-                <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' />
+                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
+                <Icon
+                  name={icon}
+                  className='w-6 h-6 hover:scale-[1.1] duration-100'
+                />
               </div>
             </button>
           </li>
@@ -161,10 +181,64 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className='flex gap-4 items-center bg-slate-300 rounded-sm px-2 py-3 text-lg text-slate-600 hover:bg-slate-400'>
-        <button className='flex items-center '>
-          Download <RiArrowDropDownLine className='w-6 h-6' />
+      <div className='flex gap-4  items-center bg-slate-300 rounded-sm px-2 py-3 text-lg text-slate-600 hover:bg-slate-400 relative'>
+        <button
+          onClick={() => setDropdown((toggle) => !toggle)}
+          className='flex items-center'
+        >
+          Download
+          <RiArrowDropDownLine
+            className={`w-6 h-6 transition-transform duration-300 ${
+              dropdown ? 'rotate-180' : ''
+            }`}
+          />
         </button>
+        {dropdown && (
+          <div
+            className={`absolute z-50 right-0 top-14 transform transition-all duration-100 ${
+              dropdown ? ' animate-fadeIn' : ''
+            }`}
+          >
+            <div className=' rounded border mt-1 w-52 max-w-sm transform bg-slate-100 shadow-xl'>
+              <div className='p-1 space-y-1 text-sm font-semibold '>
+                <button className='flex items-center gap-2 w-full hover:bg-slate-400 cursor-pointer p-2 rounded-sm text-left'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    className='w-[18px] h-[18px]'
+                  >
+                    <path d='M12 17V3'></path>
+                    <path d='m6 11 6 6 6-6'></path>
+                    <path d='M19 21H5'></path>
+                  </svg>
+                  Download PNG
+                </button>
+                <button className='flex items-center gap-2 w-full hover:bg-slate-400 duration-100 cursor-pointer p-2 rounded-sm text-left'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    className='w-[18px] h-[18px]'
+                  >
+                    <path d='M12 17V3'></path>
+                    <path d='m6 11 6 6 6-6'></path>
+                    <path d='M19 21H5'></path>
+                  </svg>
+                  Download SVG
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
