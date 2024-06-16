@@ -53,7 +53,7 @@ const getRandomElement = <T,>(arr: T[]): T =>
   arr[Math.floor(Math.random() * arr.length)];
 
 const Navbar = () => {
-  const { icon, updateIconStyles, undo } = useLogo();
+  const { icon, updateIconStyles, undo, downloadPng, downloadSvg } = useLogo();
   const [dropdown, setDropdown] = useState(false);
 
   const [currentItem, setCurrentItem] = useState<Item>({
@@ -201,7 +201,10 @@ const Navbar = () => {
           >
             <div className=' rounded border mt-1 w-52 max-w-sm transform bg-slate-100 shadow-xl'>
               <div className='p-1 space-y-1 text-sm font-semibold '>
-                <button className='flex items-center gap-2 w-full hover:bg-slate-400 cursor-pointer p-2 rounded-sm text-left'>
+                <button
+                  onClick={downloadPng}
+                  className='flex items-center gap-2 w-full hover:bg-slate-400 cursor-pointer p-2 rounded-sm text-left'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'
@@ -218,7 +221,10 @@ const Navbar = () => {
                   </svg>
                   Download PNG
                 </button>
-                <button className='flex items-center gap-2 w-full hover:bg-slate-400 duration-100 cursor-pointer p-2 rounded-sm text-left'>
+                <button
+                  onClick={downloadSvg}
+                  className='flex items-center gap-2 w-full hover:bg-slate-400 duration-100 cursor-pointer p-2 rounded-sm text-left'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'

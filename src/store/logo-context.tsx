@@ -1,4 +1,12 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
+import { toPng, toSvg } from 'html-to-image';
+import download from 'downloadjs';
 
 const LogoContext = createContext(undefined);
 
@@ -22,6 +30,7 @@ function LogoProvider({ children }) {
   const [history, setHistory] = useState([
     { icon: 'LuActivity', styles: initialLogoStyle },
   ]);
+  const logoRef = useRef(null);
 
   useEffect(() => {
     const storedHistory = localStorage.getItem('logoHistory');
@@ -85,6 +94,35 @@ function LogoProvider({ children }) {
       return prevHistory;
     });
   };
+
+  const downloadPng = () => {
+    if (logoRef.current === null) {
+      return;
+    }
+
+    toPng(logoRef.current)
+      .then((dataUrl) => {
+        download(dataUrl, 'icon.png');
+      })
+      .catch((err) => {
+        console.error('Oops, something went wrong!', err);
+      });
+  };
+
+  const downloadSvg = () => {
+    if (logoRef.current === null) {
+      return;
+    }
+
+    toSvg(logoRef.current)
+      .then((dataUrl) => {
+        download(dataUrl, 'icon.svg');
+      })
+      .catch((err) => {
+        console.error('Oops, something went wrong!', err);
+      });
+  };
+
   return (
     <LogoContext.Provider
       value={{
@@ -95,6 +133,9 @@ function LogoProvider({ children }) {
         iconStyles,
         updateIconStyles,
         undo,
+        logoRef,
+        downloadPng,
+        downloadSvg,
       }}
     >
       {children}

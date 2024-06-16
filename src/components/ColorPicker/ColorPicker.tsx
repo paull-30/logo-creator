@@ -68,9 +68,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       <span className='self-start mb-2 font-mono text-sm'>{title}</span>
       <RgbaColorPicker color={color} onChange={handleColorChange} />
       <div className='flex gap-2 w-full mt-4'>
-        <div className='w-[25%] flex flex-col items-center'>
+        <div className='w-[40%] flex flex-col items-center'>
           <input
-            className='border-slate-200 border-2 rounded-md w-full'
+            className='border-slate-200 border-2 rounded-md w-full text-center'
             value={hex}
             onChange={handleHexChange}
           />
@@ -78,7 +78,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
         <div className='w-[18.75%] flex flex-col items-center'>
           <input
-            className='border-slate-200 border-2 rounded-md w-full'
+            className='border-slate-200 border-2 rounded-md w-full text-center'
             value={color.r}
             onChange={(e) => handleRgbChange(e, 'r')}
           />
@@ -86,7 +86,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
         <div className='w-[18.75%] flex flex-col items-center'>
           <input
-            className='border-slate-200 border-2 rounded-md w-full'
+            className='border-slate-200 border-2 rounded-md w-full text-center'
             value={color.g}
             onChange={(e) => handleRgbChange(e, 'g')}
           />
@@ -94,7 +94,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
         <div className='w-[18.75%] flex flex-col items-center'>
           <input
-            className='border-slate-200 border-2 rounded-md text-center w-full'
+            className='border-slate-200 border-2 rounded-md text-center w-full '
             value={color.b}
             onChange={(e) => handleRgbChange(e, 'b')}
           />
@@ -102,7 +102,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
         <div className='w-[18.75%] flex flex-col items-center'>
           <input
-            className='border-slate-200 border-2 rounded-md w-full'
+            className='border-slate-200 border-2 rounded-md w-full text-center'
             value={color.a}
             onChange={handleAlphaChange}
           />
