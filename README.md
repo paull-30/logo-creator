@@ -19,3 +19,5 @@ This is a React application built with TypeScript, Tailwind CSS, and useContext.
 - useContext for state management
 - html-to-image library for converting HTML elements to PNG and SVG
 - downloadjs library for downloading files
+
+![Screenshot 2024-06-17 225454](https://github.com/paull-30/logoCreator/assets/19426658/d39a5c25-3d15-4d30-9efe-28b611724059)
