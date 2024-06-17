@@ -5,19 +5,19 @@ import Icon from '../Icon/Icon';
 const IconOptions = () => {
   const { icon, setOpen, iconStyles, updateIconStyles } = useLogo();
 
-  const handleSizeChange = (e) => {
+  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ size: parseInt(e.target.value) });
   };
 
-  const handleRotateChange = (e) => {
+  const handleRotateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ rotate: parseInt(e.target.value) });
   };
 
-  const handleStrokeWidthChange = (e) => {
+  const handleStrokeWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ strokeWidth: parseInt(e.target.value) });
   };
 
-  const handleFillOpacityChange = (e) => {
+  const handleFillOpacityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ fillOpacity: parseInt(e.target.value) });
   };
 
@@ -26,7 +26,6 @@ const IconOptions = () => {
       <div>
         <div className='flex justify-between mt-1 font-mono text-sm'>
           <span>Icon</span>
-          {/* <span>{`${Icon.type.name.slice(2)}`}</span> */}
           <span>{icon.slice(2)}</span>
         </div>
         <button>
@@ -34,7 +33,6 @@ const IconOptions = () => {
             className='bg-slate-300 h-12 w-12 flex items-center justify-center rounded-sm mt-2 hover:bg-slate-400'
             onClick={() => setOpen((toggle) => !toggle)}
           >
-            {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
             <Icon
               name={icon}
               className='w-6 h-6 hover:scale-[1.1] duration-100'

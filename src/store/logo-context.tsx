@@ -1,16 +1,45 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-} from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { toPng, toSvg } from 'html-to-image';
 import download from 'downloadjs';
 
-const LogoContext = createContext(undefined);
+interface LogoStyles {
+  size: number;
+  strokeWidth: number;
+  rotate: number;
+  strokeColor: string;
+  fillColor: string;
+  fillOpacity: number;
+  padding: number;
+  radius: number;
+  backgroundColor: string;
+  shadow: string;
+}
 
-const initialLogoStyle = {
+interface IHistory {
+  icon: string;
+  styles: LogoStyles;
+}
+
+interface LogoContextProps {
+  icon: string;
+  updateIcon: (newIcon: string) => void;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  iconStyles: LogoStyles;
+  updateIconStyles: (updatedStyles: Partial<LogoStyles>) => void;
+  undo: () => void;
+  logoRef: React.RefObject<HTMLDivElement>;
+  downloadPng: () => void;
+  downloadSvg: () => void;
+}
+
+interface LogoProviderProps {
+  children: React.ReactNode;
+}
+
+const LogoContext = createContext<LogoContextProps | null>(null);
+
+const initialLogoStyle: LogoStyles = {
   size: 200,
   strokeWidth: 2,
   rotate: 0,
@@ -23,19 +52,20 @@ const initialLogoStyle = {
   shadow: '',
 };
 
-function LogoProvider({ children }) {
-  const [icon, setIcon] = useState('LuActivity');
-  const [open, setOpen] = useState(false);
-  const [iconStyles, setIconStyles] = useState(initialLogoStyle);
-  const [history, setHistory] = useState([
+function LogoProvider({ children }: LogoProviderProps) {
+  const [icon, setIcon] = useState<string>('LuActivity');
+  const [open, setOpen] = useState<boolean>(false);
+  const [iconStyles, setIconStyles] = useState<LogoStyles>(initialLogoStyle);
+  const [history, setHistory] = useState<IHistory[]>([
     { icon: 'LuActivity', styles: initialLogoStyle },
   ]);
-  const logoRef = useRef(null);
+  const logoRef = useRef<null | HTMLDivElement>(null);
 
+  //GET THE HISTORY IF IT EXISTS AND SET IT AS DEFAULT
   useEffect(() => {
     const storedHistory = localStorage.getItem('logoHistory');
     if (storedHistory) {
-      const parsedHistory = JSON.parse(storedHistory);
+      const parsedHistory: IHistory[] = JSON.parse(storedHistory);
       const lastState = parsedHistory[parsedHistory.length - 1];
       setHistory(parsedHistory);
       setIcon(lastState.icon);
@@ -43,11 +73,13 @@ function LogoProvider({ children }) {
     }
   }, []);
 
+  //SET THE HISTORY TO LOCALSTORAGE
   useEffect(() => {
     localStorage.setItem('logoHistory', JSON.stringify(history));
   }, [history]);
 
-  const updateIcon = (newIcon) => {
+  //UPDATE THE ICON BASED ON THE NAME AND SET IT TO HISTORY
+  const updateIcon = (newIcon: string) => {
     setIcon(newIcon);
     setHistory((prevHistory) => {
       const newHistory = [
@@ -61,7 +93,8 @@ function LogoProvider({ children }) {
     });
   };
 
-  const updateIconStyles = (updatedStyles) => {
+  //UPDATE THE STYLES BASED ON A PARTICULAR STYLE OR MORE; SET TO HISTORY
+  const updateIconStyles = (updatedStyles: Partial<LogoStyles>) => {
     setIconStyles((prevStyles) => {
       const newStyles = { ...prevStyles, ...updatedStyles };
       setHistory((prevHistory) => {
@@ -75,6 +108,7 @@ function LogoProvider({ children }) {
     });
   };
 
+  //UNDO TO THE NEWEST STATE
   const undo = () => {
     setHistory((prevHistory) => {
       const newHistory = [...prevHistory];
@@ -95,6 +129,7 @@ function LogoProvider({ children }) {
     });
   };
 
+  //DOWNLOAD THE REF AS PNG
   const downloadPng = () => {
     if (logoRef.current === null) {
       return;
@@ -109,6 +144,7 @@ function LogoProvider({ children }) {
       });
   };
 
+  //DOWNLOAD THE REF AS SVG
   const downloadSvg = () => {
     if (logoRef.current === null) {
       return;

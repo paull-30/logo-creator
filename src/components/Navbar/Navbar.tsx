@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LuUndo2 } from 'react-icons/lu';
-import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import { TbClover } from 'react-icons/tb';
 import { CiHeart } from 'react-icons/ci';
 import { IoMdHeartHalf } from 'react-icons/io';
@@ -101,7 +101,7 @@ const Navbar = () => {
                 onClick={() =>
                   updateIconStyles({
                     backgroundColor: 'rgb(203 213 225)',
-                    radius: '0',
+                    radius: 0,
                   })
                 }
               >
@@ -109,7 +109,6 @@ const Navbar = () => {
                   name={icon}
                   className='w-6 h-6 hover:scale-[1.1] duration-100'
                 />
-                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -119,8 +118,8 @@ const Navbar = () => {
                 className='bg-yellow-300 h-12 w-12 flex items-center justify-center'
                 onClick={() =>
                   updateIconStyles({
-                    backgroundColor: 'rgb(253 224 71)',
-                    radius: '0',
+                    backgroundColor: '#FDE047',
+                    radius: 0,
                   })
                 }
               >
@@ -128,7 +127,6 @@ const Navbar = () => {
                   name={icon}
                   className='w-6 h-6 hover:scale-[1.1] duration-100'
                 />
-                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -138,8 +136,8 @@ const Navbar = () => {
                 className='bg-red-300 h-12 w-12 flex items-center justify-center rounded-xl'
                 onClick={() =>
                   updateIconStyles({
-                    backgroundColor: 'rgb(252 165 165)',
-                    radius: '2rem',
+                    backgroundColor: '#FCA5A5',
+                    radius: 32,
                   })
                 }
               >
@@ -147,7 +145,6 @@ const Navbar = () => {
                   name={icon}
                   className='w-6 h-6 hover:scale-[1.1] duration-100'
                 />
-                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
               </div>
             </button>
           </li>
@@ -157,12 +154,11 @@ const Navbar = () => {
                 className='bg-green-300 h-12 w-12 flex items-center justify-center rounded-full '
                 onClick={() =>
                   updateIconStyles({
-                    backgroundColor: 'rgb(134 239 172)',
-                    radius: '300px',
+                    backgroundColor: '#86EFAC',
+                    radius: 300,
                   })
                 }
               >
-                {/* <Icon.type className='w-6 h-6 hover:scale-[1.1] duration-100' /> */}
                 <Icon
                   name={icon}
                   className='w-6 h-6 hover:scale-[1.1] duration-100'

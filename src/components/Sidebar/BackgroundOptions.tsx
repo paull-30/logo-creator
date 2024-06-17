@@ -1,28 +1,27 @@
-import React from 'react';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import { useLogo } from '../../store/logo-context';
 
-const shadowClasses = {
-  0: 'shadow-none',
-  1: 'shadow-sm',
-  2: 'shadow-md',
-  3: 'shadow-lg',
-  4: 'shadow-xl',
-  5: 'shadow-2xl',
+const shadowClasses: Record<string, string> = {
+  '0': 'shadow-none',
+  '1': 'shadow-sm',
+  '2': 'shadow-md',
+  '3': 'shadow-lg',
+  '4': 'shadow-xl',
+  '5': 'shadow-2xl',
 };
 
 const BackgroundOptions = () => {
   const { updateIconStyles, iconStyles } = useLogo();
 
-  const handleRadiusChange = (e) => {
+  const handleRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ radius: parseInt(e.target.value) });
   };
 
-  const handlePaddingChange = (e) => {
+  const handlePaddingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ padding: parseInt(e.target.value) });
   };
 
-  const handleShadowChange = (e) => {
+  const handleShadowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateIconStyles({ shadow: shadowClasses[e.target.value] });
   };
 

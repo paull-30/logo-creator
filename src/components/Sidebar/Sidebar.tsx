@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import IconOptions from './IconOptions';
 import BackgroundOptions from './BackgroundOptions';
 import Logo from '../Logo/Logo';
@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   return (
     <div className='flex flex-col md:flex-row h-screen '>
-      <div className='p-2 max-md:px-4 border-r flex flex-col gap-2 h-full max-w-72 sm:flex-row sm:border-r-0 sm:h-16 sm:border-b sm:max-w-full'>
+      <div className='p-2 max-md:px-4 md:border-b-0 md:border-r flex md:flex-col gap-2 md:h-full md:max-w-72 sm:flex-row sm:border-r-0 sm:h-16 sm:border-b sm:max-w-full'>
         <button
           onClick={() => setActiveButton('icon')}
           className={`max-w-full  px-4 py-2 md:p-2 lg:px-4 lg:py-2 lg:w-full rounded-sm text-left font-medium duration-100 hover:bg-slate-300 ${

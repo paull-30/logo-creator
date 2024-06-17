@@ -1,6 +1,5 @@
 import * as lucideIcons from 'react-icons/lu';
 import { IoCloseOutline } from 'react-icons/io5';
-import { IconType } from 'react-icons';
 import { useLogo } from '../../store/logo-context';
 import { useState } from 'react';
 import Icon from '../Icon/Icon';
@@ -17,7 +16,7 @@ const IconPicker = () => {
     icon.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
@@ -28,12 +27,12 @@ const IconPicker = () => {
       } `}
     >
       <div className='flex mt-10'>
-        <p className='text-2xl ml-20 font-medium'>Pick an icon</p>
-        <span className='ml-auto mr-7 cursor-pointer'>
+        <p className='text-2xl md:ml-20 sm:ml-5 font-medium'>Pick an icon</p>
+        <span className='ml-auto md:mr-7 sm:mr-5 cursor-pointer'>
           <IoCloseOutline onClick={() => setOpen(false)} size={40} />
         </span>
       </div>
-      <form className='mt-4 ml-20'>
+      <form className='mt-4 md:ml-20 sm:ml-5'>
         <input
           type='text'
           className='h-11 rounded-md bg-transparent border-2 border-slate-200 text-slate-600 px-4'
@@ -42,7 +41,7 @@ const IconPicker = () => {
           onChange={handleSearch}
         />
       </form>
-      <div className='mt-4 mx-20 flex flex-wrap gap-2 cursor-pointer'>
+      <div className='mt-4 md:ml-20 md:mr-8 sm:ml-5 flex flex-wrap gap-2 cursor-pointer justify-start'>
         {filteredIconList.map((icon, index) => {
           return (
             <div

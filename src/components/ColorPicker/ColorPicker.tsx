@@ -8,36 +8,41 @@ interface ColorPickerProps {
   onColorChange: (color: string) => void;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({
+interface RGBA {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}
+
+const ColorPicker = ({
   title,
   initialColor,
   onColorChange,
-}) => {
+}: ColorPickerProps) => {
   const [color, setColor] = useState(hexToRgba(initialColor));
   const [hex, setHex] = useState(initialColor);
 
-  const handleColorChange = (newColor: {
-    r: number;
-    g: number;
-    b: number;
-    a: number;
-  }) => {
+  //CONVERT RGBA TO HEX AND SET THE STYLES WITH THE RESPECTIVE COLOR
+  const handleColorChange = (newColor: RGBA) => {
     const newHex = rgbaToHex(newColor);
     setColor(newColor);
     setHex(newHex);
     onColorChange(newHex);
   };
 
+  //CHANGE THE COLOR BASED ON HEX VALUE FROM THE INPUT
   const handleHexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newHex = e.target.value;
+    setHex(newHex);
     if (isValidHex(newHex)) {
       const newColor = hexToRgba(newHex);
       setColor(newColor);
-      setHex(newHex);
       onColorChange(newHex);
     }
   };
 
+  //CHANGE THE COLOR BASED OFF THE R,G,B
   const handleRgbChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     component: 'r' | 'g' | 'b'
@@ -52,6 +57,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     }
   };
 
+  //CHANGE THE OPACITY FROM THE INPUT
   const handleAlphaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value) && value >= 0 && value <= 1) {
