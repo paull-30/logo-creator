@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+# Fast Logo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application built with TypeScript, Tailwind CSS, and useContext. It allows users to customize and download icons in PNG or SVG format. With this app, you can choose an icon from a library, adjust its color, stroke color, size, rotation, and more. Additionally, you can add a background with a customizable color, opacity, padding, and rounded corners. The app also provides an undo functionality to revert changes and a history feature to keep track of your previous designs.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Choose an icon from a library of icons
+- Customize the icon's color, stroke color, size, rotation, and more
+- Add a background with customizable color, opacity, padding, and rounded corners
+- Undo changes and revert to previous designs
+- Keep track of your design history (up to 10 designs)
+- Download the icon in PNG or SVG format
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- React
+- TypeScript
+- Tailwind CSS
+- useContext for state management
+- html-to-image library for converting HTML elements to PNG and SVG
+- downloadjs library for downloading files
